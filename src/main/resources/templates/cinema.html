@@ -1,0 +1,86 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../static/css/jquery.mobile-1.4.5.css" th:href="@{/css/jquery.mobile-1.4.5.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/cinema.css" th:href="@{/css/cinema.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cinema-detail.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
+    <script th:src="@{/js/database1.js}"></script>
+
+<style>
+#back{
+		margin-left:5px;
+		position:absolute;
+		width:50px;
+}
+</style>
+</head>
+
+<body>
+   <div data-role="page">
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" >
+            <div id="back"><a href="javascript:history.back(-1)"><img th:src="@{/image/back.png}"></a></div>
+        <h2>影院</h2>
+        </div>
+     <div data-role="content">
+      <div class="div1">  
+         <ul data-role="listview" style="margin:0.5px" data-icon="false" th:each="cinema : ${cinema.content}">
+             <li>
+                 <a th:href="@{/cinema/detail(id=${cinema.id})}">
+                     <div class='cdetail'>
+                         <h3 th:text="${cinema.name}">name</h3>
+                         <p style='color:#CCC' th:text="${cinema.location}">location </p>
+                         <div class='biaoqian'>观影小食</div>
+                         <div class='xin'>新</div>
+                         <p style='display:inline-table;font-weight:normal;text-shadow:none;color:#CCC'>新人专享</p>
+                         </div>
+                    <div>
+<!--                     <p style='float:right'>-->
+<!--                         <b style='color:#F00;font-size:16px;font-weight:normal;text-shadow:none'></b>-->
+<!--                         <b style='color:#F00;font-weight:normal;text-shadow:none'>元</b>起</p>-->
+<!--                     <p style='color:#CCC; float:right'>km</p>-->
+                     </div>
+         </a>
+         </li>
+         </ul>
+      </div>
+     </div>
+       <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+      <div data-role="navbar">
+          <ul class="ft" style="margin:0.5px;text-align:center" id="ft">
+              <li>
+                  <a th:href="@{/}" data-ajax="false">
+                      <div><img th:src="@{image/icon1.png}"></div>
+                      <p style="margin:0;">正在热映</p>
+                  </a>
+              </li>
+              <li>
+                  <a th:href="@{/future}" data-ajax="false">
+                      <div><img th:src="@{image/icon2.png}"></div>
+                      <p style="margin:0;"> 即将热映</p>
+                  </a>
+              </li>
+              <li>
+                  <a th:href="@{/cinema}" data-ajax="false">
+                      <div><img th:src="@{image/icon03.png}"></div>
+                      <p style="margin:0;text-shadow:none;color:#FF2B4A">影院</p>
+                  </a>
+              </li>
+              <li>
+                  <a th:href="@{/mine}" data-ajax="false">
+                      <div><img th:src="@{image/icon4.png}"></div>
+                      <p style="margin:0;">我的</p>
+                  </a>
+              </li>
+          </ul>
+      </div>
+     </div>
+     </div>
+
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS Document */
+#date{
+    width:100%;
+}
+
+
+#date a{
+	  background-color:#FFF;
+	  color:black;
+	  text-shadow:none;
+	  font-weight:normal;
+	  border:none;
+	  font-size:5px;
+}
+
+
+.activeclass{
+      color:red !important;
+	  border-bottom:1px solid red  !important;
+}
+
+
+.cdetail{
+   width:80%;
+   position:relative;
+   float:left;
+       
+}
+
+.price{
+   width:20%;
+   position:relative;
+   float:left; 
+
+}
+
+.time{
+     width:20%;
+	 height:30px;
+	 display:inline-table;
+	 margin-top:10px;
+	 background-color:#e6e6e6;
+	 text-align:center;
+	 border-radius:5px;
+	 margin-left:10px;
+}
+
+.biaoqian{
+    width:60px;
+	height:18px;
+	border-radius:3px;
+	color:#75BAFF;
+	border:1px solid #75BAFF;
+    font-weight:normal;
+	text-shadow:none;
+    line-height:18px;
+	font-size:0.8em;
+	text-align:center;
+	
+}
+.xin{
+    width:18px;
+	height:18px;
+	border-radius:3px;
+	color:#FFF;
+	background-color:#FF4242;
+    font-weight:normal;
+	text-shadow:none;
+    line-height:18px;
+	font-size:0.8em;
+	text-align:center;
+	display:inline-table;
+	
+}
+
+.tabs > div{
+     display:none;
+}
+.tabs > div.active{
+   display:block;
+}
+
+.tip{
+	  height:20px;
+	  width:100%;
+	  background-color:#F5F5F5;
+	  font-size:0.5em;
+	  color:#999;
+	  font-weight:normal;
+	  text-shadow:none;
+	  line-height:20px;
+}
