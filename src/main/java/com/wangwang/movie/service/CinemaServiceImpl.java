@@ -3,12 +3,14 @@ package com.wangwang.movie.service;
 import com.wangwang.movie.dao.CinemaRepository;
 import com.wangwang.movie.po.Cinema;
 
+import com.wangwang.movie.po.ShowMovie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class CinemaServiceImpl implements CinemaService {
@@ -27,4 +29,8 @@ public class CinemaServiceImpl implements CinemaService {
     public Cinema getCinema(Integer id) {
         return cinemaRepository.getOne(id);
     }
+
+
+
+
 }

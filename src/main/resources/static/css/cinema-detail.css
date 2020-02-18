@@ -85,13 +85,15 @@
 	position:relative;
 	float:left;
 }
-.container5{
+.ctner5{
 	width:10%;
 	position:relative;
 	float:left;
 	margin-top:5%;
 }
-#bt{
+.buybt{
+	position: relative;
+	right: 0;
 	height:20px;
 	width:40px;
 	background-color:#FFF;
@@ -109,5 +111,8 @@
 }
 .tabs > div.active{
 	display:block;
+}
+.back{
+	float: left;
 }
 

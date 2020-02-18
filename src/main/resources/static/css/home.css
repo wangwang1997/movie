@@ -21,8 +21,9 @@ a:link{
 }
 .container4{
      width:60%;
-	 position:relative;
+	 position:absolute;
 	 float:left;
+	left: 30px;
 }
 .container5{
 	float: right;

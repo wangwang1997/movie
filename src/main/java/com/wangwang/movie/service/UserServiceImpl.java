@@ -6,6 +6,8 @@ import com.wangwang.movie.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -16,5 +18,11 @@ public class UserServiceImpl implements UserService {
     public User checkUser(String username, String password) {
         User user = userRepository.findByUsernameAndPassword(username, MD5Utils.code(password));
         return user;
+    }
+
+    @Transactional
+    @Override
+    public User getUserWant(Integer id) {
+        return userRepository.getOne(id);
     }
 }

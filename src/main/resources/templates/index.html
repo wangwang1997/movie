@@ -8,6 +8,9 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/film-detail.css}">
 <link rel="stylesheet" th:href="@{/css/swiper.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/cinema.css" th:href="@{/css/cinema.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cinema-detail.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/target.css" th:href="@{/css/target.css}">
 <script th:src="@{/js/jquery.js}"></script>
 <script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
 <script th:src="@{/js/database.js}"></script>
@@ -51,7 +54,7 @@
                   </div>
               </a>
               <div class="container5 ui-block-c">
-                  <a th:href="@{/seat}"><div class="buy bt">购票</div></a>
+                  <a th:href="@{/show/target(id=${show.movie.id})}"><div class="buy bt">购票</div></a>
               </div>
           </li>
         </ul>

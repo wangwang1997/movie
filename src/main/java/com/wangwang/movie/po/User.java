@@ -1,5 +1,10 @@
 package com.wangwang.movie.po;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.repository.cdi.Eager;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +20,11 @@ public class User {
     private String password;//用户密码
     private String img;//头像
 
-    @ManyToMany(mappedBy = "wantSee_users")
+    @ManyToMany(mappedBy = "wantSee_users",fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
     private List<Movie> wantSee = new ArrayList<>();
-    @ManyToMany(mappedBy = "hasSeen_users")
+    @ManyToMany(mappedBy = "hasSeen_users",fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
     private List<Movie> hasSeen = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")

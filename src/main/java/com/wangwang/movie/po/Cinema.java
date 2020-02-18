@@ -1,5 +1,8 @@
 package com.wangwang.movie.po;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,7 @@ public class Cinema {
 
     private String location;//地址
 
-    @OneToMany(mappedBy = "cinema")
+    @ManyToMany(mappedBy = "cinemas")
     private List<ShowMovie> showMovies = new ArrayList<>();
 
     public Cinema() {

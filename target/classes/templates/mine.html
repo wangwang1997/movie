@@ -7,6 +7,8 @@
 <link rel="stylesheet" type="text/css" href="../static/css/jquery.mobile-1.4.5.css" th:href="@{/css/jquery.mobile-1.4.5.css}">
 <link rel="stylesheet" type="text/css" href="../static/css/my.css" th:href="@{/css/my.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/cinema-detail.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/want.css" th:href="@{/css/want.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/want.css" th:href="@{/css/film-detail.css}">
 <script th:src="@{/js/jquery.js}"></script>
 <script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
 <script th:src="@{/js/database1.js}"></script>
@@ -43,12 +45,12 @@
            </a>
           </li>
           <li>
-           <a id="w1">想看的电影
+           <a id="w1" th:href="@{/mine/wantSee}">想看的电影
                 <div class="go"><img th:src="@{/image/go.png}" width="20px"></div>
            </a>
           </li>
           <li>
-            <a id="w2">看过的电影
+            <a id="w2" th:href="@{/mine/hasSeen}">看过的电影
                 <div class="go"><img th:src="@{/image/go.png}" width="20px"></div>
            </a>
           </li> 
@@ -98,51 +100,5 @@
       </div>
      </div>
 </div>
-<script>
-  $(function(){
-		 var loc=decodeURI(location.href);
-		 var param=loc.split("?")[1];
-		 var paramList=param.split("=")[1];
-		 console.log(paramList);
-		 //alert(paramList);
-		 if(paramList!="fasd"){	 
-		 $(".div12").empty();
-		 $(".div12").append("<div id='username'>"+paramList+"</div>");
-		 }
-		 
-			 
-		 
-		 db.transaction(function (tx) {   
-         tx.executeSql('SELECT * FROM user', [], function (tx, results) {
-             var len = results.rows.length, i;
-             for (i = 0; i < len; i++){
-              //results.rows.item(i).name
-			var wantname=(results.rows.item(i).like).split("&");
-			var watched=(results.rows.item(i).watched).split("&");
-			if(paramList==results.rows.item(i).name){
-			  $(".div1").find("img").attr("src",results.rows.item(i).image);
-			  $("#num2").html(wantname.length);
-			  $("#num3").html(watched.length);
-			}
-		}
-	   })
-	  })
-	  
-	  
-	});
-	$("#w1").click(function(){
-		var name=$("#username").text();	
-	    var urlx="want.html?name=" +name; 
-		location.href=encodeURI(urlx);
-		});
-   $("#w2").click(function(){
-		var name=$("#username").text();	
-	    var urlx="watched.html?name=" +name;
-		location.href=encodeURI(urlx);
-		});
-	$("#back").click(function(){
-			window.history.go(-1);
-		});
-</script>
 </body>
 </html>

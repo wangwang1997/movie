@@ -1,6 +1,7 @@
 package com.wangwang.movie.service;
 
 import com.wangwang.movie.dao.ShowMovieRepository;
+import com.wangwang.movie.po.Cinema;
 import com.wangwang.movie.po.ShowMovie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,11 @@ public class ShowMovieServiceImpl implements ShowMovieService {
     @Override
     public ShowMovie getMovie(Integer id) {
         return showMovieRepository.getOne(id);
+    }
+
+    @Override
+    public Page<Cinema> getCinemasById(Integer id, Pageable pageable) {
+        return showMovieRepository.findCinemasById(id,pageable);
     }
 
 

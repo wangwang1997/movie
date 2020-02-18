@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title></title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-1.4.5.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
-    <link rel="stylesheet" th:href="@{/css/swiper.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/film-future.css}">
+    <link rel="stylesheet" type="text/css" href="..static/css/seat.css" th:href="/css/seat.css">
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
     <script th:src="@{/js/database.js}"></script>
@@ -19,15 +17,15 @@
     <div data-role="page">
          <div data-role="header" data-position="fixed" data-tap-toggle="false">
          <div class="back"><a href="javascript:history.back(-1)"><img th:src="@{/image/back.png}"></a></div>
-        <h2 class="place"></h2>
+        <h2 class="place" th:text="${cname}"></h2>
         </div>
     
         <div data-role="content">
          <div class="tdetail" style="border-bottom:1px solid #CCC">
-          <h4 class="film-name"></h4>
-          <p class="date"></p>
+          <h4 class="film-name" th:text="${show.movie.name}"></h4>
+          <p class="date" ></p>
           <p class="time"></p>
-          <p class="kind"></p>
+          <p class="kind" th:text="${show.version}"></p>
          </div>
         <div> 
         <div id="seatcolor" class="ui-grid-b">

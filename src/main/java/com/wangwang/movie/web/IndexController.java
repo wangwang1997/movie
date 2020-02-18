@@ -54,8 +54,4 @@ public class IndexController {
     }
 
 
-    @GetMapping("/seat")
-    public String seat(){
-        return "seat";
-    }
 }

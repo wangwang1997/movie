@@ -45,9 +45,5 @@ public class LoginController {
         session.removeAttribute("user");
         return "mine";
     }
-    @GetMapping("/wantSee")
-    public String wantSee(Model model){
-        
-        return "want";
-    }
+
 }

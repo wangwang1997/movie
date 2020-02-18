@@ -91,3 +91,40 @@
 	  text-shadow:none;
 	  line-height:20px;
 }
+.mode-wrapper{
+	width: 1200px;
+	height: 100%;
+	overflow-y: auto;
+	/*适应苹果*/
+	-webkit-overflow-scrolling: touch;
+}
+.mode{
+	position: relative;
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	border-radius: 5px;
+	margin-top: 10px;
+	margin-right: 10px;
+	background: lightblue;
+}
+.mode a{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+.mode a p{
+	color: #FFF;
+	text-shadow: none;
+}
+.release{
+
+	position: absolute;
+	z-index: 1;
+	top: 10px;
+	color: #22aadd;
+	width: 100%;
+	height: 40%;
+
+}

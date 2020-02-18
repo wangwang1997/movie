@@ -1,5 +1,8 @@
 package com.wangwang.movie.po;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +23,10 @@ public class ShowMovie {
     @JoinColumn(name = "movie_id",referencedColumnName = "id",nullable = false)
     private Movie movie;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cinema_id",referencedColumnName = "id",nullable = false)
-    private Cinema cinema;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    List<Cinema> cinemas = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "showMovies")
     private List<Comment> comments = new ArrayList<>();
@@ -30,13 +34,14 @@ public class ShowMovie {
     public ShowMovie() {
     }
 
-    public Cinema getCinema() {
-        return cinema;
+    public List<Cinema> getCinemas() {
+        return cinemas;
     }
 
-    public void setCinema(Cinema cinema) {
-        this.cinema = cinema;
+    public void setCinemas(List<Cinema> cinemas) {
+        this.cinemas = cinemas;
     }
+
 
     public Integer getId() {
         return id;
@@ -104,7 +109,6 @@ public class ShowMovie {
                 ", price='" + price + '\'' +
                 ", showTing='" + showTing + '\'' +
                 ", movie=" + movie +
-                ", cinema=" + cinema +
                 ", comments=" + comments +
                 '}';
     }
