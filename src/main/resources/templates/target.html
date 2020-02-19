@@ -6,10 +6,10 @@
 <title></title>
 <link rel="stylesheet" type="text/css" href="../static/css/jquery.mobile-1.4.5.css" th:href="@{/css/jquery.mobile-1.4.5.css}">
 <link rel="stylesheet" type="text/css" href="../static/css/target.css" th:href="@{/css/target.css}">
-    <link rel="stylesheet" type="text/css" href="..static/css/seat.css" th:href="@{/css/seat.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/seat.css}">
 <script src="../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
 <script src="../static/js/jquery.mobile-1.4.5.js" th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
-<script src="../static/js/database1.js" th:src="@{/js/database1.js}"></script>
+    <script th:src="@{/js/cinema-detail.js}"></script>
 </head>
 
 <body>
@@ -45,7 +45,7 @@
                      </div>
                      <ul class="mode-wrapper">
                          <li class="mode">
-                             <a th:href="@{/show/seat(name = ${cinema.name},mid = ${show.movie.id})}">
+                             <a th:href="@{/show/seat(name = ${cinema.name},mid = ${show.movie.id},cid = ${cinema.id})}">
                                  <div class="release">18:00</div>
                                  <p style="margin-top: 40px;margin-bottom: 10px;"><b th:text="${show.showTing}" style="font-size: 1.2em;color:#FFCC00;"></b>号厅</p>
                                  <p th:text="'¥ ' + ${show.price}" style="font-size: 1em;margin-top: -10px;"></p>
@@ -74,6 +74,8 @@
        </div>
     </div>
        </div>
+<script>
 
+</script>
 </body>
 </html>

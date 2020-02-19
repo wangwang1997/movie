@@ -1,23 +1,23 @@
 [
- {"num":"1",
-  "row":"8",
-  "column":"10"
+ {"num":1,
+  "row":8,
+  "column":10
  },
- {"num":"2",
-  "row":"9",
-  "column":"9"
+ {"num":2,
+  "row":9,
+  "column":9
  },
- {"num":"3",
-  "row":"10",
-  "column":"8"
+ {"num":3,
+  "row":10,
+  "column":8
  },
-  {"num":"4",
-  "row":"11",
-  "column":"10"
+  {"num":4,
+  "row":11,
+  "column":10
  },
-  {"num":"5",
-  "row":"10",
-  "column":"9"
+  {"num":5,
+  "row":10,
+  "column":9
  }
- 
+
 ]

@@ -23,6 +23,9 @@ public class Cinema {
     @ManyToMany(mappedBy = "cinemas")
     private List<ShowMovie> showMovies = new ArrayList<>();
 
+    @OneToMany(mappedBy = "cinema")
+    private List<Ticket> tickets = new ArrayList<>();
+
     public Cinema() {
     }
 
@@ -67,6 +70,13 @@ public class Cinema {
         this.location = location;
     }
 
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 
     @Override
     public String toString() {

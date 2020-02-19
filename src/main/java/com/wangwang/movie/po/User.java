@@ -30,6 +30,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> tickets = new ArrayList<>();
+
+
+
     private String phone;//联系电话
 
     public User() {
@@ -97,6 +102,14 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     @Override

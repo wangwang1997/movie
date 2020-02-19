@@ -5,6 +5,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,10 @@ public class ShowMovie {
     @Id
     @GeneratedValue
     private Integer id;//  上映电影id
-    private String time;//上映时间段
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date StartTime;//上映时间
+    private Integer NumOfPlay;//场次
     private String version;//上映版本
     private String price;//票价区间
     private String showTing;//放映厅
@@ -52,12 +56,12 @@ public class ShowMovie {
     }
 
 
-    public String getTime() {
-        return time;
+    public Date getStartTime() {
+        return StartTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setStartTime(Date startTime) {
+        StartTime = startTime;
     }
 
     public String getVersion() {
@@ -100,15 +104,24 @@ public class ShowMovie {
         this.showTing = showTing;
     }
 
+    public Integer getNumOfPlay() {
+        return NumOfPlay;
+    }
+
+    public void setNumOfPlay(Integer numOfPlay) {
+        NumOfPlay = numOfPlay;
+    }
+
     @Override
     public String toString() {
         return "ShowMovie{" +
                 "id=" + id +
-                ", time='" + time + '\'' +
+                ", StartTime=" + StartTime +
                 ", version='" + version + '\'' +
                 ", price='" + price + '\'' +
                 ", showTing='" + showTing + '\'' +
                 ", movie=" + movie +
+                ", cinemas=" + cinemas +
                 ", comments=" + comments +
                 '}';
     }
