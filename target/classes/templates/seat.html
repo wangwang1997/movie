@@ -27,8 +27,8 @@
                 <p class="date" ></p>
                 <p class="ctime"></p>
                 <p class="kind" th:text="${show.version}"></p>
-                <p class="kind" th:text="${seat.row} + ' 排'"></p>
-                <p class="kind" th:text="${seat.column} + ' 列'"></p>
+                <p class="kind" th:text="${Seat.row} + ' 排'"></p>
+                <p class="kind" th:text="${Seat.column} + ' 列'"></p>
 
          </div>
         <div> 
@@ -43,23 +43,33 @@
               <p style="text-align:center"><img th:src="@{/image/seat-green.png}">已选</p>
              </div>
            </div>
-       <div class="seatarea">
-               <div class="seatheader">
-                 <p class="yinmu" th:text="${show.showTing}+' 号厅'"></p>
-                  <p class="word">银幕中央</p>
-                   <div class="seatcontent">
-                       <div class="seats" th:each="row : ${#numbers.sequence(1,seat.row)}">
+            <div class="seatarea">
+                <div class="seatheader">
+                    <p class="yinmu" th:text="${show.showTing}+' 号厅'"></p>
+                    <p class="word">银幕中央</p>
+                    <div class="seatcontent">
+                        <div class="seats" th:each="seat,iterStat : ${seatJudge}">
 
-                           <div class="seats" th:each="col : ${#numbers.sequence(1,seat.column)}">
-                              
-                                   <img th:src="@{/image/seat-red.png}"
-                                        th:onclick="|GetRowAndCol(${row},${col},${show.movie.id})|">
+                            <img th:class="${seat.row+''+seat.column}"
+                                 th:src="@{/image/seat-red.png}"
+                                 th:if="${seat.selled eq true}"
+                                 th:onclick="|GetRowAndCol(${seat.row},
+                                 ${seat.column},
+                                 ${show.movie.id},
+                                 ${cid})|"/>
+                            <img th:class="${seat.row+''+seat.column}"
+                                 th:src="@{/image/seat.png}"
+                                 th:if="${seat.selled eq false}"
+                                 th:onclick="|GetRowAndCol(${seat.row},
+                                 ${seat.column},
+                                 ${show.movie.id},
+                                 ${cid})|"/>
 
-                           </div>
-                       </div>
-                   </div>
-              </div>
-       </div>
+                            <div th:if="${(iterStat.count % Seat.column) eq 0}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
       </div>
        <div class="seatnum"> 
             <p style="display:inline-table">推荐座位</p>
@@ -70,7 +80,7 @@
         </div>
         
        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-       <h3 class="foot">请先选座</h3>
+           <h3 class="foot">请先选座</h3>
        </div>
   </div>
     </div>

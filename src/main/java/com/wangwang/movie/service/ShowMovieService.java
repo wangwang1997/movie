@@ -20,7 +20,7 @@ public interface ShowMovieService {
 
     Seat getSeatForMovie(Integer cid);
 
-    Boolean getTicketByUnique(Integer row, Integer col, Integer mid, Integer id);
+    Boolean getTicketByUnique(Integer row, Integer col, Integer mid, Integer cid);
 
     List<Seat> getSeats(Integer id, Integer cid);
 }

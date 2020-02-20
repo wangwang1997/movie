@@ -9,8 +9,12 @@ import java.util.List;
 
 public interface TicketRepository extends JpaRepository<Ticket,Integer> {
 
-    @Query("select t from Ticket t where t.movie.id =:mid and t.user.id =:uid ")
-    Ticket findUniqueTicketById(@Param("mid") Integer mid, @Param("uid") Integer uid);
+    @Query("select t from Ticket t where t.movie.id =:mid and t.cinema.id =:cid " +
+            "and t.SeatCol =:col and t.SeatRow =:row")
+    Ticket findUniqueTicketById(@Param("row") Integer row,
+                                @Param("col") Integer col,
+                                @Param("mid") Integer mid,
+                                @Param("cid") Integer cid);
 
     @Query("select t from Ticket t where t.movie.id =:mid and t.cinema.id =:cid")
     List<Ticket> findAllByMidAndCid(@Param("mid") Integer id, @Param("cid") Integer cid);

@@ -42,20 +42,21 @@ public class Show_MovieController {
                        @RequestParam("cid") Integer cid,
                        Model model){
 
+        model.addAttribute("cid",cid);
         model.addAttribute("cname",name);
         model.addAttribute("show",showMovieService.getMovie(id));
-        model.addAttribute("seat",showMovieService.getSeatForMovie(cid));
+        model.addAttribute("Seat",showMovieService.getSeatForMovie(cid));
         model.addAttribute("seatJudge",showMovieService.getSeats(id,cid));
         return "seat";
     }
     @PostMapping("/ChoosenSeat")
     @ResponseBody
     public Boolean chooseSeat(@RequestParam Integer row, @RequestParam Integer col,
-                              @RequestParam Integer mid,
-                              HttpSession session){
+                              @RequestParam Integer mid, @RequestParam Integer cid
+                              ){
         //System.out.println(row);
-        User user = (User) session.getAttribute("user");
-        Boolean flag = showMovieService.getTicketByUnique(row,col,mid,user.getId());
+        //User user = (User) session.getAttribute("user");
+        Boolean flag = showMovieService.getTicketByUnique(row,col,mid,cid);
         if(flag){
             return false;
         }

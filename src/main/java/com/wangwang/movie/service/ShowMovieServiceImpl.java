@@ -31,6 +31,8 @@ public class ShowMovieServiceImpl implements ShowMovieService {
     @Autowired
     private TicketRepository ticketRepository;
 
+    private String JsonPath = "static/json/seat.json";
+
     @Transactional
     @Override
     public Page<ShowMovie> listShow(Pageable pageable) {
@@ -51,7 +53,8 @@ public class ShowMovieServiceImpl implements ShowMovieService {
     @Override
     public Seat getSeatForMovie(Integer cid) {
         try {
-            List<Seat> seats = JsonUtil.readArray("static/json/seat.json", Seat.class);
+            List<Seat> seats = JsonUtil.readArray(JsonPath, Seat.class);
+            //System.out.println(seats);
             for (Seat seat:seats
                  ) {
                 if(seat.getNum() == cid){
@@ -67,10 +70,11 @@ public class ShowMovieServiceImpl implements ShowMovieService {
     }
 
     @Override
-    public Boolean getTicketByUnique(Integer row, Integer col, Integer mid, Integer id) {
+    public Boolean getTicketByUnique(Integer row, Integer col, Integer mid, Integer cid) {
         try {
-            Ticket ticket = ticketRepository.findUniqueTicketById(mid, id);
-            if (ticket.getSeatCol() == col && ticket.getSeatRow() == row) {
+            Ticket ticket = ticketRepository.findUniqueTicketById(row, col, mid, cid);
+           // System.out.println(ticket);
+            if (ticket != null) {
                 return true;//已经有人买了这个位子的票
             }
         }catch(NotFoundException e){
@@ -83,15 +87,30 @@ public class ShowMovieServiceImpl implements ShowMovieService {
     public List<Seat> getSeats(Integer id, Integer  cid) {
         try{
             List<Ticket> tickets = ticketRepository.findAllByMidAndCid(id, cid);
+            Integer row = this.getSeatForMovie(cid).getRow();
+            Integer col = this.getSeatForMovie(cid).getColumn();
+            //System.out.println(row + "排" + col + "列");
             List<Seat> seats = new ArrayList<>();
-            for (Ticket ticket:tickets
-                 ) {
-                Seat seat = new Seat();
-                seat.setColumn(ticket.getSeatCol());
-                seat.setRow(ticket.getSeatRow());
-                seats.add(seat);
+
+                for(int r=1;r<=row;r++){
+                    for(int c=1;c<=col;c++){
+                        Seat seat = new Seat();
+                        seat.setNum(cid);
+                        seat.setColumn(c);
+                        seat.setRow(r);
+                        for (Ticket ticket:tickets
+                        ) {
+                        if(ticket.getSeatRow() == r && ticket.getSeatCol() == c){
+                            seat.setSelled(true);//表明已经卖掉了
+                            break;
+                        }else{
+                            seat.setSelled(false);//
+                        }
+                    }
+                        seats.add(seat);
+                }
             }
-            System.out.println(seats);
+            //System.out.println(seats);
             return seats;
         }catch (NotFoundException e){
             e.printStackTrace();
