@@ -11,7 +11,7 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 21/02/2020 21:19:20
+ Date: 19/02/2020 16:55:14
 */
 
 SET NAMES utf8mb4;
@@ -164,12 +164,11 @@ DROP TABLE IF EXISTS `t_show`;
 CREATE TABLE `t_show` (
   `id` int(11) NOT NULL,
   `price` varchar(255) DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
   `cinema_id` int(11) DEFAULT NULL,
   `movie_id` int(11) NOT NULL,
   `version` varchar(255) DEFAULT NULL,
   `show_ting` varchar(255) DEFAULT NULL,
-  `num_of_play` int(11) DEFAULT NULL,
-  `start_time` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKw248g17hg18jwacijlgyhatx` (`cinema_id`),
   KEY `FKaifcr8sfbwxk6wq6as4crvojg` (`movie_id`),
@@ -181,10 +180,10 @@ CREATE TABLE `t_show` (
 -- Records of t_show
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_show` VALUES (1, '15', 1, 1, '原版3D', '1', 5, '2020-02-08 08:00:00.000000');
-INSERT INTO `t_show` VALUES (2, '20', 1, 2, '原版3D', '2', 6, NULL);
-INSERT INTO `t_show` VALUES (3, '13', 1, 3, '国语2D', '3', 6, NULL);
-INSERT INTO `t_show` VALUES (4, '20', 1, 4, '原版2D', '4', 6, NULL);
+INSERT INTO `t_show` VALUES (1, '15', '', 1, 1, '原版3D', '1');
+INSERT INTO `t_show` VALUES (2, '20', '434232', 1, 2, '原版3D', '2');
+INSERT INTO `t_show` VALUES (3, '13', '23232', 1, 3, '国语2D', '3');
+INSERT INTO `t_show` VALUES (4, '20', '1321321', 1, 4, '原版2D', '4');
 COMMIT;
 
 -- ----------------------------
@@ -212,36 +211,6 @@ INSERT INTO `t_show_cinemas` VALUES (1, 2);
 COMMIT;
 
 -- ----------------------------
--- Table structure for t_ticket
--- ----------------------------
-DROP TABLE IF EXISTS `t_ticket`;
-CREATE TABLE `t_ticket` (
-  `id` int(11) NOT NULL,
-  `closing_time` datetime(6) DEFAULT NULL,
-  `seat_col` int(11) DEFAULT NULL,
-  `seat_row` int(11) DEFAULT NULL,
-  `movie_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `cinema_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKb1ach2adk5dxgjg4nq2kx9rtl` (`movie_id`),
-  KEY `FKesms7i37kkdpo7rax9n4iqn84` (`user_id`),
-  KEY `FKsuosovrdim6gm4g52wljm329j` (`cinema_id`),
-  CONSTRAINT `FKb1ach2adk5dxgjg4nq2kx9rtl` FOREIGN KEY (`movie_id`) REFERENCES `t_movie` (`id`),
-  CONSTRAINT `FKesms7i37kkdpo7rax9n4iqn84` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`),
-  CONSTRAINT `FKsuosovrdim6gm4g52wljm329j` FOREIGN KEY (`cinema_id`) REFERENCES `t_cinema` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_ticket
--- ----------------------------
-BEGIN;
-INSERT INTO `t_ticket` VALUES (1, '2020-02-19 20:12:18.000000', 1, 1, 4, 1, 1);
-INSERT INTO `t_ticket` VALUES (2, '2020-02-19 20:58:33.000000', 4, 3, 2, 1, 1);
-INSERT INTO `t_ticket` VALUES (3, '2020-02-19 20:04:41.000000', 4, 4, 4, 2, 1);
-COMMIT;
-
--- ----------------------------
 -- Table structure for t_user
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user`;
@@ -260,7 +229,6 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `t_user` VALUES (1, '/image/wei.jpg', '202cb962ac59075b964b07152d234b70', '188533', 'user');
-INSERT INTO `t_user` VALUES (2, '/image/ys01.jpg', '202cb962ac59075b964b07152d234b70', '177777', 'wangwang');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
