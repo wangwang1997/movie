@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* CSS Document */
+a:link{
+     text-decoration:none;
+}
+#ft a{
+     background-color:#FFF;
+	 border:none;
+}
+.cdetail{
+   width:80%;
+   position:relative;
+   float:left;
+       
+}
+
+.price{
+   width:20%;
+   position:relative;
+   float:left; 
+
+}
+
+.time{
+     width:20%;
+	 height:30px;
+	 display:inline-table;
+	 margin-top:10px;
+	 background-color:#e6e6e6;
+	 text-align:center;
+	 border-radius:5px;
+}
+
+.biaoqian{
+    width:60px;
+	height:18px;
+	border-radius:3px;
+	color:#75BAFF;
+	border:1px solid #75BAFF;
+    font-weight:normal;
+	text-shadow:none;
+    line-height:18px;
+	font-size:0.8em;
+	text-align:center;
+	
+}
+.xin{
+    width:18px;
+	height:18px;
+	border-radius:3px;
+	color:#FFF;
+	background-color:#FF4242;
+    font-weight:normal;
+	text-shadow:none;
+    line-height:18px;
+	font-size:0.8em;
+	text-align:center;
+	display:inline-table;
+	
+}
+.back{
+	float: left;
+}

@@ -1,0 +1,262 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>影片详情</title>
+<link rel="stylesheet" type="text/css" href="../static/css/jquery.mobile-1.4.5.css" th:href="@{/css/jquery.mobile-1.4.5.css}">
+<link rel="stylesheet" type="text/css" href="../static/css/film-detail.css" th:href="@{/css/film-detail.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
+<script th:src="@{/js/database.js}"></script>
+</head>
+
+<body>
+       <div data-role="page">
+       <div data-role="header" data-position="fixed" data-tap-toggle="false">
+         <div class="back"><a href="javascript:history.back(-1)"><img th:src="@{/image/back.png}"></a></div>
+       <h2>影片详情</h2>
+       </div>
+       
+       <div data-role="content">
+        <div class="backdrop">
+         <div class="film-pic"><img th:src="${detail.movie.image}" /></div>
+         <div class="film-detail">
+             <div>
+                 <h2 class="film-name" th:text="${detail.movie.name}"></h2>
+                 <h4 th:text="${detail.movie.type}"></h4>
+                 <h4 th:text="${#dates.format(detail.movie.showTime,'yyyy-MM-dd')}+' 中国大陆上映' "></h4>
+            </div>
+        </div>
+        </div>
+           <div class="introduce">
+               <div class="ui-grid-b">
+                   <div class="ui-block-a"  id="score" align="center">
+                       <b style='font-size:18px;color: #FC0;' th:text="${detail.movie.score}"></b><p>观众评分</p>
+                   </div>
+                   <div class="ui-block-b" align="center">
+                       <b style="font-size:18px" ></b><p>V淘推荐度</p>
+                   </div>
+                   <div class="ui-block-c" align="center">
+                       <b style="font-size:18px;color:orangered;" th:text="${detail.movie.wantSee}"></b><p>想看人数</p>
+                   </div>
+               </div>
+               <div id="div3">
+                   <div class="ui-grid-a want" style="float:left;margin-left:10px">
+                       <div class="ui-block-a"><img th:src="@{/image/want.png}" width="15px" height="15px"></div>
+                       <div class="ui-block-b" style="margin-top:10px">想看</div>
+                   </div>
+                   <div class="ui-grid-a watched" style="float:right;margin-right:10px">
+                       <div class="ui-block-a"><img th:src="@{/image/watched.png}" width="15px" height="15px"></div>
+                       <div class="ui-block-b" style="margin-top:10px">看过</div>
+                   </div>
+               </div>
+           </div>
+       <div>
+          <div class="div5-p">
+              <h4>演职人员</h4>
+          </div>
+          <div class="div5">
+              <h4>剧照</h4>
+          </div>
+          <div class="div6">
+          </div>
+       </div>
+      
+      <div class="div7">
+      <h4>观众评论</h4>
+      <div class="say">
+      <div id="bt">全部</div>
+      <div id="bt">最新</div>
+      <div id="bt1">好评3w+</div>
+      <div id="bt2">值得期待的电影</div>
+      </div>
+          <div th:each="comm : ${detail.comments}">
+              <div id="say1">
+              <div id="user">
+                <div class="upic">
+                 <img th:src="${comm.user.img}" class="touxiang">
+                </div>
+                <div class="uname">
+                <b id="uname" th:text="${comm.user.username}"></b>
+                </div>
+              </div>
+              <div class="pinlun" th:text="${comm.content}"></div>
+              </div>
+              <div class="postdate" th:text="${#dates.format(comm.postDate,'yyyy-MM-dd HH:mm')}">
+
+              </div>
+              <hr/>
+          </div>
+      </div>  
+     </div>
+       <a th:href="@{/seat}">
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="background-color:#FF2B4A;color:#FFF">
+         <h2 id="foot">选座购票</h2>
+        </div>
+       </a>
+     </div>
+    </div>
+<!--    <script>-->
+<!--    $(function(){-->
+<!--		 var loc=decodeURI(location.href);-->
+<!--		 var param=loc.split("?")[1];-->
+<!--		 var paramList=param.split("&");-->
+<!--		 var key,val;-->
+<!--		 console.log(paramList);-->
+<!--         for(index in paramList){-->
+<!--			 key=paramList[index].split("=")[0];-->
+<!--		     val=paramList[index].split("=")[1];-->
+<!--			 if("src"==key){-->
+<!--				 var na=val.split("/")[1];-->
+<!--				 var na1=na.split(".")[0];-->
+<!--				 //console.log(na1);-->
+<!--				 vall="video/"+na1+".mp4";-->
+<!--				 console.log(vall);-->
+<!--			 $(".film-pic").append("<video width='180px' height='150px' src='"+vall+"' autoplay='autoplay' loop='loop' muted>");-->
+<!--			 }else if("title"==key){-->
+<!--				 $("#film-name").append(val);-->
+<!--			 }else{-->
+<!--				if(val<=10){-->
+<!--					$("#score").append("<b style='font-size:18px' id='film-score'>"+val+"</b><p>"+"观众评分"+"</p>");-->
+<!--				}else{-->
+
+<!--					$("#score").append("<b style='font-size:18px' id='film-score'>"+"尚未上映"+"</b><p>"+"无观众评分"+"</p>");-->
+<!--				}-->
+
+<!--			 }-->
+<!--		 }-->
+<!--	});-->
+<!--	-->
+<!--	db.transaction(function (tx) {-->
+<!--		tx.executeSql('SELECT * FROM Score', [], function (tx, results) {-->
+<!--             var len = results.rows.length, i;-->
+<!--             for (i = 0; i < len; i++){-->
+<!--              //results.rows.item(i).name-->
+<!--			  if($("#film-name").text() == results.rows.item(i).name){-->
+<!--	          //$("#film-score").append(results.rows.item(i).score);-->
+<!--			  $("#film-degree").append(results.rows.item(i).degree);-->
+<!--			  $("#film-people").append(results.rows.item(i).people);-->
+<!--			  break;-->
+<!--			  }-->
+<!--			 }-->
+<!--			 })-->
+
+<!--		tx.executeSql('SELECT * FROM Filmdetails', [], function (tx, results) {-->
+<!--             var len = results.rows.length, i;-->
+<!--             for (i = 0; i < len; i++){-->
+<!--              //results.rows.item(i).name-->
+<!--			  if($("#film-name").text() == results.rows.item(i).name){-->
+<!--	           var nodeStr =-->
+<!--			        "<p>"+ results.rows.item(i).English + "</p>"-->
+<!--					+ "<p>"+ results.rows.item(i).kind + "</p>"-->
+<!--					+ "<p>"+ results.rows.item(i).placetime + "</p>"-->
+<!--					+ "<p>"+results.rows.item(i).date + "</p>"-->
+
+<!--			   var str ="<a>"-->
+<!--			           +"<p id='text'>"+results.rows.item(i).introduce.substr(0,84)+"</p>"-->
+<!--					   +"<div class='div-p'><p id='text1'>"+"展开"+"</p></div>"-->
+<!--					   +"</a>"-->
+<!--			   var pinlun=(results.rows.item(i).pinlun).split("&");-->
+<!--			  $("#pinlun1").append(pinlun[0]);-->
+<!--			  $("#pinlun2").append(pinlun[1]);-->
+<!--			  $("#pinlun3").append(pinlun[2]);-->
+<!--	          $(".film-detail").append(nodeStr);-->
+<!--			  $(".div4").append(str);-->
+<!--			  var flag=true;-->
+<!--			  $(".div4").click(function(){-->
+<!--              if(flag==true){-->
+<!--                $( this ).addClass("div44");-->
+<!--			    $("#text").html(results.rows.item(i).introduce);-->
+<!--				$("#text1").html("");-->
+<!--				flag=false;-->
+<!--              }else{-->
+<!--                $(this).removeClass("div44");-->
+<!--				 $("#text").html(results.rows.item(i).introduce.substr(0,84));-->
+<!--				 $("#text1").html("展开");-->
+<!--				flag=true;-->
+<!--                }-->
+<!--               })-->
+<!--			  break;-->
+<!--			  }-->
+<!--			 }-->
+<!--			 })-->
+
+<!--		tx.executeSql('SELECT * FROM Filmimage', [], function (tx, results) {-->
+<!--             var len = results.rows.length, i,j,k;-->
+<!--             for (i = 0; i < len; i++){-->
+<!--              //results.rows.item(i).name-->
+<!--			  var img=(results.rows.item(i).actorpic).split("&");-->
+<!--			  var actname=(results.rows.item(i).actorname).split("&");-->
+<!--			  var actjob=(results.rows.item(i).actorjob).split("&");-->
+<!--			  var pic=(results.rows.item(i).filmimage).split("&");-->
+<!--			  if($("#film-name").text() == results.rows.item(i).name){-->
+<!--	          for (j = 0; j < img.length; j++){-->
+<!--			   var nStr = "<a>"-->
+<!--			        + "<div class='actor'><img width='75px' height='90px'src='" +img[j]+ "'>"-->
+<!--					+ "<p style='color:#000;margin:5px'>"+ actname[j] + "</p>"-->
+<!--					+ "<p>"+ actjob[j] + "</p>"-->
+<!--					+ "</div>"-->
+<!--					+ "</a>"-->
+<!--					 $(".div5").append(nStr);-->
+<!--			  }-->
+<!--			  for (k = 0; k < pic.length; k++){-->
+<!--		 	   var str1 = "<a>"-->
+<!--			             +"<div class='fpic'><img width='100%' height='90px' src='" +pic[k]+ "'>"+"</div>"-->
+<!--	                     +"</a>"-->
+<!--			  $(".div6").append(str1);-->
+
+<!--			  }-->
+<!--			  break;-->
+<!--			  }-->
+<!--			 }-->
+<!--			 })-->
+
+<!--			 /*$("#want").click(function(){-->
+<!--			            var name=$("#film-name").text();-->
+<!--						var src=$(".film-pic").attr("src");-->
+<!--						var dates=$(".film-detail").find("p:eq(3)")-->
+<!--						var urlx="target.html?src=" +src+"&name="+ name+"&dates="+ dates;-->
+<!--						location.href=encodeURI(urlx);-->
+<!--			 })*/-->
+<!--			 $("#foot").click(function(){-->
+<!--			            var title=$("#film-name").text();-->
+
+<!--						var urlx="target.html?title=" +title;-->
+<!--						location.href=encodeURI(urlx);-->
+<!--			 })-->
+
+<!--			 $(".want").click(function(){-->
+
+<!--				if($(this).find("img").attr("src") == "image/want.png}"){-->
+<!--					$(this).find("img").attr("src","image/want1.png}");-->
+<!--					$(this).css("color","#F00")-->
+<!--				}else if($(this).find("img").attr("src") == "image/want1.png}"){-->
+<!--					$(this).find("img").attr("src","image/want.png}");-->
+<!--					$(this).css("color","#333")-->
+<!--				}-->
+
+
+<!--			});-->
+<!--			$(".watched").click(function(){-->
+
+<!--				if($(this).find("img").attr("src") == "image/watched.png}"){-->
+<!--					$(this).find("img").attr("src","image/watched1.png}");-->
+<!--					$(this).css("color","#F00")-->
+<!--				}else if($(this).find("img").attr("src") == "image/watched1.png}"){-->
+<!--					$(this).find("img").attr("src","image/watched.png}");-->
+<!--					$(this).css("color","#333")-->
+<!--				}-->
+
+
+<!--			});-->
+
+
+<!--		})-->
+<!--		$("#back").click(function(){-->
+<!--			window.history.go(-1);-->
+<!--		});
+// 	</script>-->
+</body>
+</html>

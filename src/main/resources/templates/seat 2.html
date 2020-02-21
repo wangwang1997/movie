@@ -1,0 +1,88 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-1.4.5.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/seat.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
+    <script th:src="@{/js/database.js}"></script>
+    <script th:src="@{/js/swiper.min.js}"></script>
+    <script th:src="@{/js/database1.js}"></script>
+    <script th:src="@{/js/cinema-detail.js}"></script>
+</head>
+
+<body>
+    <div data-role="page">
+         <div data-role="header" data-position="fixed" data-tap-toggle="false">
+         <div class="back"><a href="javascript:history.back(-1)"><img th:src="@{/image/back.png}"></a></div>
+        <h2 class="place" th:text="${cname}"></h2>
+        </div>
+    
+        <div data-role="content">
+            <div class="tdetail" style="border-bottom:1px solid #CCC">
+                <h4 class="film-name" th:text="${show.movie.name}"></h4>
+                <p class="date" ></p>
+                <p class="ctime"></p>
+                <p class="kind" th:text="${show.version}"></p>
+                <p class="kind" th:text="${Seat.row} + ' 排'"></p>
+                <p class="kind" th:text="${Seat.column} + ' 列'"></p>
+
+         </div>
+        <div> 
+        <div class="seatcolor ui-grid-b">
+             <div class="ui-block-a">
+             <p style="text-align:center"><img th:src="@{/image/seat.png}">可选</p>
+             </div>
+             <div class="ui-block-b">
+              <p style="text-align:center"><img th:src="@{/image/seat-red.png}">已售</p>
+             </div>
+             <div class="ui-block-c">
+              <p style="text-align:center"><img th:src="@{/image/seat-green.png}">已选</p>
+             </div>
+           </div>
+            <div class="seatarea">
+                <div class="seatheader">
+                    <p class="yinmu" th:text="${show.showTing}+' 号厅'"></p>
+                    <p class="word">银幕中央</p>
+                    <div class="seatcontent">
+                        <div class="seats" th:each="seat,iterStat : ${seatJudge}">
+
+                            <img th:class="${seat.row+''+seat.column}"
+                                 th:src="@{/image/seat-red.png}"
+                                 th:if="${seat.selled eq true}"
+                                 th:onclick="|GetRowAndCol(${seat.row},
+                                 ${seat.column},
+                                 ${show.movie.id},
+                                 ${cid})|"/>
+                            <img th:class="${seat.row+''+seat.column}"
+                                 th:src="@{/image/seat.png}"
+                                 th:if="${seat.selled eq false}"
+                                 th:onclick="|GetRowAndCol(${seat.row},
+                                 ${seat.column},
+                                 ${show.movie.id},
+                                 ${cid})|"/>
+
+                            <div th:if="${(iterStat.count % Seat.column) eq 0}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+       <div class="seatnum"> 
+            <p style="display:inline-table">推荐座位</p>
+            <div class="snum"><p>1人</p></div>
+            <div class="snum"><p>2人</p></div>
+            <div class="snum"><p>3人</p></div>
+            <div class="snum"><p>4人</p></div>
+        </div>
+        
+       <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+           <h3 class="foot">请先选座</h3>
+       </div>
+  </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title></title>
+<link rel="stylesheet" type="text/css" href="../static/css/jquery.mobile-1.4.5.css" th:href="@{/css/jquery.mobile-1.4.5.css}">
+<link rel="stylesheet" type="text/css" href="../static/css/my.css" th:href="@{/css/my.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cinema-detail.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/want.css" th:href="@{/css/want.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/want.css" th:href="@{/css/film-detail.css}">
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
+<script th:src="@{/js/database1.js}"></script>
+</head>
+
+<body>
+<div data-role="page">
+       <div data-role="header" data-position="fixed" data-tap-toggle="false">
+       <div class="back"><a href="javascript:history.back(-1)"><img th:src="@{/image/back.png}"></a></div>
+       <h2>我的</h2>
+       </div>
+      <div data-role="content">
+       <div class="div1">
+        <div class="div11">
+         <img th:src="@{/image/wei.jpg}" id="touxiang">
+        </div>
+        <div class="div12">
+        <div id="username" th:switch="${session.user}">
+            <p th:case="null">你还没有登陆~~~<br>
+                <a href="login.html" th:href="@{/login}" data-ajax="false" >前往登陆>>></a></p>
+            <p th:case="*" th:text="${session.user.username}"></p>
+        </div>
+
+
+        </div>
+       </div>
+     <div style="margin-top:20px"> 
+       <ul data-role="listview" style="margin:0.5px" data-icon="false" class="addcontent box">
+          <li th:unless="${#lists.isEmpty(session.user)}">
+           <a>
+           我的订单
+
+           <div class="go"><img th:src="@{/image/go.png}" width="20px"></div>
+           </a>
+          </li>
+          <li>
+           <a id="w1" th:href="@{/mine/wantSee}">想看的电影
+                <div class="go"><img th:src="@{/image/go.png}" width="20px"></div>
+           </a>
+          </li>
+          <li>
+            <a id="w2" th:href="@{/mine/hasSeen}">看过的电影
+                <div class="go"><img th:src="@{/image/go.png}" width="20px"></div>
+           </a>
+          </li> 
+          <li>
+           <a>
+           基本信息
+           <div class="go"><img th:src="@{/image/go.png}" width="20px"></div>
+           </a>
+          </li>
+           <li th:if="${session.user} ne null ">
+               <a th:href="@{/logout}">
+                   注销
+                   <div class="go"><img th:src="@{/image/go.png}" width="20px"></div>
+               </a>
+           </li>
+       </ul>
+     </div>
+      </div>
+       <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+      <div data-role="navbar">
+          <ul id="ft">
+              <li>
+                  <a th:href="@{/}" data-ajax="false">
+                      <div><img th:src="@{image/icon1.png}"></div>
+                      <p style="margin:0;">正在热映</p>
+                  </a>
+              </li>
+              <li>
+                  <a th:href="@{/future}" data-ajax="false">
+                      <div><img th:src="@{image/icon2.png}"></div>
+                      <p style="margin:0;"> 即将热映</p>
+                  </a>
+              </li>
+              <li>
+                  <a th:href="@{/cinema}" data-ajax="false">
+                      <div><img th:src="@{image/icon3.png}"></div>
+                      <p style="margin:0;">影院</p>
+                  </a>
+              </li>
+              <li>
+                  <a th:href="@{/mine}" data-ajax="false">
+                      <div><img th:src="@{image/icon04.png}"></div>
+                      <p style="margin:0;text-shadow:none;color:#FF2B4A">我的</p>
+                  </a>
+              </li>
+          </ul>
+      </div>
+     </div>
+</div>
+</body>
+</html>
