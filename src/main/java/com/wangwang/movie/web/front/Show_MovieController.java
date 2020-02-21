@@ -62,6 +62,13 @@ public class Show_MovieController {
         }
         return true;
     }
+    @GetMapping("/buy")
+    public String buy(@RequestParam("mid") Integer mid,
+                      @RequestParam("cid") Integer cid,
+                      Model model){
+        model.addAttribute("show",showMovieService.getMovie(mid));
+        return "ticket";
+    }
 
 
 }

@@ -8,13 +8,7 @@
 <script th:src="@{/js/jquery.js}"></script>
 <script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
 <script th:src="@{/js/database1.js}"></script>
-<style>
-#back{
-		margin-left:5px;
-		position:absolute;
-		width:50px;
-}
-</style>
+
 </head>
 
 <body>
@@ -30,6 +24,7 @@
 
                      <div class='time'>
                             <b class='b1' th:text="${#dates.format(movie.showTime, 'yyyy-MM-dd') + ' '+#dates.dayOfWeekNameShort(movie.showTime)}"></b>
+                            <b class="b1"></b>
                      </div>
                      <ul data-role='listview' style='margin:0.5px' data-icon='false' id='listview'>
                             <li>

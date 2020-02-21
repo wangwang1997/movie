@@ -4,41 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title></title>
-<link rel="stylesheet" type="text/css" href="../static/css/jquery.mobile-1.4.5.css">
-<link rel="stylesheet" type="text/css" href="../static/css/ticket.css">
-<script src="../static/js/jquery.js"></script>
-<script src="../static/js/jquery.mobile-1.4.5.js"></script>
-<script src="../static/js/database1.js"></script>
-<style>
-#back{
-		margin-left:5px;
-		position:absolute;
-		width:50px;
-}
-</style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-1.4.5.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/film-detail.css}">
+    <link rel="stylesheet" th:href="@{/css/swiper.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/ticket.css" th:href="@{/css/ticket.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/cinema.css" th:href="@{/css/cinema.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cinema-detail.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/target.css" th:href="@{/css/target.css}">
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
+<script th:src="@{/js/database1.js}"></script>
 
 <body>
 <div data-role="page">
      <div data-role="header" data-position="fixed" data-tap-toggle="false">
-         <div id="back"><a href="javascript:history.back(-1)"><img th:src="@{/image/back.png}"></a></div>
+         <div class="back" style="float: left"><a href="javascript:history.back(-1)"><img th:src="@{/image/back.png}"></a></div>
         <h2>订票详情</h2>   
     </div>
     <div data-role="content">   
     <div class="div1">
        <div class="film-detail">
-        <div>
-        <h2 id="film-name"></h2>
-        <b style="display:inline-table;font-weight:normal;text-shadow:none;"></b>
-        </div>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+            <div>
+                <h2 id="film-name" th:text="${show.movie.name}"></h2>
+                <b style="display:inline-table;font-weight:normal;text-shadow:none;"></b>
+            </div>
+            <p th:text="${show.version}"></p>
+            <p th:text="${show.showTing + ' 号厅' }"></p>
+            <p></p>
+            <p></p>
        </div>
      </div>
      <div class="div2" style="background-color:#e6e6e6;margin-top:10px">
      <p style="display:inline-table;">票价总计</p>
-     <b style='color:#FF2B4A;font-size:16px;margin-left:60%;display:inline-table'></b>
+     <b style='color:#FF2B4A;font-size:16px;margin-left:60%;display:inline-table' th:text="${show.price+' 元'}"></b>
      </div>
      <h4>购票须知</h4>
      <div class="div3" style="border-top:1px solid #CCC">
@@ -47,76 +46,12 @@
      <p> 3.由于影院系统不稳定等因素,存在出票失败的情况,会进行退款不予退换</p>
      <p> 4.购票成功后,会收到取票码短信</p>
      <p style="display:inline-table"> 5.下单即代表你同意</p>
-     <p style="display:inline-table;color:#108EE9">《淘票票用户服务协议》</p>
+     <p style="display:inline-table;color:#108EE9">《用户服务协议》</p>
      </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="background-color:#FF2B4A;">
     <h2 id="fh">立即付款</h2>
     </div>
 </div>
-<script>
-
- $(function(){
-		 var loc=decodeURI(location.href);
-		 var param=loc.split("?")[1];
-		 var paramList=param.split("&");
-		 var key,val;
-		 var day,time,end,kind,long;
-		 console.log(paramList);
-         for(index in paramList){
-			 key=paramList[index].split("=")[0];
-		     val=paramList[index].split("=")[1];
-			 if("name"==key){
-			 $("#film-name").append(val);
-			 }else if("num"==key){
-			 $(".div1").find("b").append(val+"张");
-			 }else if("day"==key){
-			  day=val;
-			 }else if("time"==key){
-			 time=val;
-			 }else if("kind"==key){
-			 kind=val;
-			 }else if("cinema"==key){
-			 $(".div1").find("p:eq(1)").append(val);
-			 }else if("ting"==key){
-			 $(".div1").find("p:eq(2)").append(val+"3D眼镜需现金租聘或购买");
-			 }else if("tic"==key){
-			  $(".div1").find("p:eq(3)").append(val.substr(0,val.length-1));
-			 }else{
-				 $(".div2").find("b").append(val+"元");
-			 }
-		 }
-	    function MtoH(key,val){//时间转化
-		var date = val.split(":");
-		var minu = parseInt(date[1])+parseInt(key);
-		var hour = parseInt(minu/60);
-		var minu2 = minu%60;
-		if(minu2 < 10){
-			minu2 = "0"+minu2;
-		}
-		date[0] = parseInt(date[0]) + hour;
-		val = date[0] + ":" + minu2; 
-		return val;     
-		}
-        
-		db.transaction(function (tx) {   
-		tx.executeSql('SELECT * FROM cinemafilm', [], function (tx, results) {
-             var film=(results.rows.item(0).film).split("&");
-			 var shichang=(results.rows.item(i).shichang).split("&");
-			 for(var i=0;i<film.length;i++){
-			 if($("#film-name").html()==film[i])
-			 {
-				end=MtoH(shichang[i],time);
-				//console.log(end); 
-				$(".div1").find("p:eq(0)").append(day+" "+time+"-"+end+"（"+kind+"）");
-				break;
-			 }
-			 }
-			 });
-		})
-		 $("#back").click(function(){
-			window.history.go(-1);
-		});	  
-	});
-</script>
+</div>
 </body>
 </html>

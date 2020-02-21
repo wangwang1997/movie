@@ -206,7 +206,9 @@
 .seats {
 	float: left;
 }
-.footsel{
-	background-color:#FF2B4A;
+.footsel {
+	background-color: #FF2B4A;
+	text-shadow: none;
+	color: #fff;
 }
 

@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title></title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-1.4.5.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/seat.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/film-detail.css}">
+    <link rel="stylesheet" th:href="@{/css/swiper.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/ticket.css" th:href="@{/css/ticket.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/cinema.css" th:href="@{/css/cinema.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cinema-detail.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/target.css" th:href="@{/css/target.css}">
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/jquery.mobile-1.4.5.js}"></script>
     <script th:src="@{/js/database.js}"></script>
@@ -75,12 +81,12 @@
             <p style="display:inline-table">推荐座位</p>
             <div class="snum"><p>1人</p></div>
             <div class="snum"><p>2人</p></div>
-            <div class="snum"><p>3人</p></div>
-            <div class="snum"><p>4人</p></div>
         </div>
         
-       <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-           <h3 class="foot">请先选座</h3>
+       <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="foot">
+           <h3 >
+               <a th:href="@{/show/buy(cid = ${cid},mid = ${show.movie.id})}">请先选座</a>
+           </h3>
        </div>
   </div>
     </div>
